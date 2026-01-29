@@ -2,400 +2,296 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🍕 Tienda de Comida Rápida</title>
+    <title>Comida Rápida - Notificaciones Reales</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Arial', sans-serif;
-            background: #f5f5f5;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: Arial, sans-serif; 
+            background: #f8f9fa; 
             padding: 20px;
-        }
-        
-        .container {
-            max-width: 100%;
+            max-width: 500px;
             margin: 0 auto;
         }
         
-        header {
-            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        .header {
+            background: #ff6b35;
             color: white;
-            padding: 25px;
+            padding: 20px;
             border-radius: 15px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        
-        h1 {
-            font-size: 1.8rem;
-            margin-bottom: 5px;
-        }
-        
-        .subtitle {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-        
-        /* Productos */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 15px;
-            margin: 25px 0;
-        }
-        
-        .product-card {
-            background: white;
-            border-radius: 12px;
-            padding: 15px;
             text-align: center;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-            cursor: pointer;
-            transition: transform 0.3s;
         }
         
-        .product-card:hover {
-            transform: translateY(-5px);
+        .productos {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
         }
         
-        .product-icon {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-        
-        .product-name {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        
-        .product-price {
-            color: #ee5a24;
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-        
-        /* Carrito */
-        .cart-section {
+        .producto {
             background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-top: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s;
         }
         
-        .cart-item {
+        .producto:hover { transform: translateY(-3px); }
+        
+        .producto-icono { font-size: 2rem; margin-bottom: 10px; }
+        
+        .carrito {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+        
+        .item-carrito {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
+            padding: 10px 0;
             border-bottom: 1px solid #eee;
         }
         
-        .cart-total {
-            display: flex;
-            justify-content: space-between;
-            font-size: 1.2rem;
-            font-weight: bold;
+        .total { 
+            font-size: 1.2rem; 
+            font-weight: bold; 
             margin-top: 15px;
             padding-top: 15px;
             border-top: 2px solid #333;
         }
         
-        /* Botones */
-        .btn {
-            background: #ee5a24;
+        .boton {
+            width: 100%;
+            padding: 15px;
+            background: #ff6b35;
             color: white;
             border: none;
-            padding: 15px 30px;
             border-radius: 10px;
             font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
-            width: 100%;
-            margin-top: 15px;
+            margin: 10px 0;
             transition: background 0.3s;
         }
         
-        .btn:hover {
-            background: #ff6b6b;
-        }
+        .boton:hover { background: #ff5722; }
         
-        .btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
+        .boton:disabled { background: #ccc; cursor: not-allowed; }
         
-        .permission-btn {
+        .boton-permisos {
             background: #4CAF50;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         
-        .permission-btn:hover {
-            background: #45a049;
-        }
+        .boton-permisos:hover { background: #45a049; }
         
-        /* Notificaciones */
-        .notification-preview {
-            background: #fff8e1;
-            border-radius: 10px;
+        .estado {
+            background: #e3f2fd;
             padding: 15px;
+            border-radius: 10px;
             margin: 15px 0;
-            border-left: 4px solid #ffd54f;
+            border-left: 4px solid #2196f3;
+            text-align: center;
         }
         
-        .notification-icon {
-            width: 50px;
-            height: 50px;
-            background: #ee5a24;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
+        .estado h3 { color: #1976d2; margin-bottom: 10px; }
         
-        /* Footer */
         footer {
             text-align: center;
-            margin-top: 30px;
             color: #666;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🍕 COMIDA RÁPIDA EXPRESS</h1>
-            <p class="subtitle">Pide y recibe notificaciones en tu celular</p>
-        </header>
-
-        <!-- Productos -->
-        <section>
-            <h2 style="margin-bottom: 15px;">📝 Menú del Día</h2>
-            <div class="products-grid" id="productsGrid">
-                <!-- Los productos se cargan con JavaScript -->
-            </div>
-        </section>
-
-        <!-- Permisos de Notificación -->
-        <section class="notification-preview">
-            <div class="notification-icon">🔔</div>
-            <h3 style="margin-bottom: 10px;">Activar Notificaciones</h3>
-            <p>Para recibir alertas de tu pedido en la bandeja del celular, activa los permisos:</p>
-            <button class="btn permission-btn" id="activateNotifications">
-                ✅ ACTIVAR NOTIFICACIONES
-            </button>
-            <p style="font-size: 0.85rem; margin-top: 10px; color: #666;">
-                <strong>⚠️ Importante:</strong> Debes aceptar los permisos cuando el navegador lo pida
-            </p>
-        </section>
-
-        <!-- Carrito -->
-        <section class="cart-section">
-            <h2 style="margin-bottom: 15px;">🛒 Tu Pedido</h2>
-            <div id="cartItems">
-                <p style="text-align: center; color: #999;">Tu carrito está vacío</p>
-            </div>
-            <div class="cart-total">
-                <span>Total:</span>
-                <span id="totalAmount">$0.00</span>
-            </div>
-            
-            <button class="btn" id="placeOrder" disabled>
-                🚀 CONFIRMAR PEDIDO
-            </button>
-        </section>
-
-        <footer>
-            <p>📍 Las notificaciones llegarán a la bandeja de tu celular como las de WhatsApp</p>
-            <p>⏰ Recibirás alertas cuando agregues productos y confirmes el pedido</p>
-        </footer>
+    <div class="header">
+        <h1>🍕 COMIDA EXPRESS</h1>
+        <p>Pide y recibe notificaciones en tu celular</p>
     </div>
 
+    <div class="estado">
+        <h3>🔔 Estado de Notificaciones</h3>
+        <p id="estadoTexto">Cargando...</p>
+        <button class="boton boton-permisos" id="btnPermisos">
+            ACTIVAR NOTIFICACIONES
+        </button>
+    </div>
+
+    <h2>📋 Menú</h2>
+    <div class="productos" id="productos">
+        <!-- Productos cargados por JS -->
+    </div>
+
+    <div class="carrito">
+        <h2>🛒 Tu Pedido</h2>
+        <div id="listaCarrito">
+            <p style="text-align:center; color:#999;">Carrito vacío</p>
+        </div>
+        <div class="total">
+            <span>Total:</span>
+            <span id="total">$0.00</span>
+        </div>
+        
+        <button class="boton" id="btnPedir" disabled>
+            ✅ CONFIRMAR PEDIDO
+        </button>
+    </div>
+
+    <footer>
+        <p><strong>⚠️ IMPORTANTE:</strong> Usa CHROME en Android</p>
+        <p>Acepta los permisos cuando el navegador lo pida</p>
+        <p>Las notificaciones aparecerán en la BANDEJA del celular</p>
+    </footer>
+
     <script>
-        // ============== DATOS DE LA TIENDA ==============
+        // ====== CONFIGURACIÓN INICIAL ======
         const productos = [
             { id: 1, nombre: "Hamburguesa", icono: "🍔", precio: 8.99 },
             { id: 2, nombre: "Pizza", icono: "🍕", precio: 12.99 },
             { id: 3, nombre: "Papas Fritas", icono: "🍟", precio: 4.99 },
-            { id: 4, nombre: "Hot Dog", icono: "🌭", precio: 5.99 },
-            { id: 5, nombre: "Tacos", icono: "🌮", precio: 7.99 },
-            { id: 6, nombre: "Ensalada", icono: "🥗", precio: 6.99 },
-            { id: 7, nombre: "Refresco", icono: "🥤", precio: 2.99 },
-            { id: 8, nombre: "Helado", icono: "🍦", precio: 3.99 }
+            { id: 4, nombre: "Refresco", icono: "🥤", precio: 2.99 },
+            { id: 5, nombre: "Hot Dog", icono: "🌭", precio: 5.99 },
+            { id: 6, nombre: "Helado", icono: "🍦", precio: 3.99 }
         ];
 
-        // ============== VARIABLES ==============
         let carrito = [];
-        let permisosActivos = false;
-        let pedidoConfirmado = false;
+        let notificacionesActivadas = false;
 
-        // ============== ELEMENTOS DOM ==============
+        // ====== ELEMENTOS DOM ======
         const elementos = {
-            productsGrid: document.getElementById('productsGrid'),
-            cartItems: document.getElementById('cartItems'),
-            totalAmount: document.getElementById('totalAmount'),
-            placeOrder: document.getElementById('placeOrder'),
-            activateNotifications: document.getElementById('activateNotifications')
+            productos: document.getElementById('productos'),
+            listaCarrito: document.getElementById('listaCarrito'),
+            total: document.getElementById('total'),
+            btnPedir: document.getElementById('btnPedir'),
+            btnPermisos: document.getElementById('btnPermisos'),
+            estadoTexto: document.getElementById('estadoTexto')
         };
 
-        // ============== INICIALIZAR ==============
+        // ====== INICIALIZAR ======
         function init() {
             cargarProductos();
-            verificarPermisos();
-            configurarEventos();
+            verificarNotificaciones();
             actualizarCarrito();
+            
+            // Eventos
+            elementos.btnPermisos.addEventListener('click', activarNotificaciones);
+            elementos.btnPedir.addEventListener('click', confirmarPedido);
         }
 
-        // ============== CARGAR PRODUCTOS ==============
+        // ====== CARGAR PRODUCTOS ======
         function cargarProductos() {
-            elementos.productsGrid.innerHTML = '';
+            elementos.productos.innerHTML = '';
             
             productos.forEach(producto => {
-                const card = document.createElement('div');
-                card.className = 'product-card';
-                card.innerHTML = `
-                    <div class="product-icon">${producto.icono}</div>
-                    <div class="product-name">${producto.nombre}</div>
-                    <div class="product-price">$${producto.precio.toFixed(2)}</div>
+                const div = document.createElement('div');
+                div.className = 'producto';
+                div.innerHTML = `
+                    <div class="producto-icono">${producto.icono}</div>
+                    <div><strong>${producto.nombre}</strong></div>
+                    <div>$${producto.precio.toFixed(2)}</div>
                 `;
                 
-                card.addEventListener('click', () => agregarAlCarrito(producto));
-                elementos.productsGrid.appendChild(card);
+                div.addEventListener('click', () => {
+                    agregarAlCarrito(producto);
+                    // Vibración en móviles
+                    if (navigator.vibrate) navigator.vibrate(100);
+                });
+                
+                elementos.productos.appendChild(div);
             });
         }
 
-        // ============== AGREGAR AL CARRITO ==============
+        // ====== AGREGAR AL CARRITO ======
         function agregarAlCarrito(producto) {
-            const itemExistente = carrito.find(item => item.id === producto.id);
+            const existente = carrito.find(item => item.id === producto.id);
             
-            if (itemExistente) {
-                itemExistente.cantidad++;
+            if (existente) {
+                existente.cantidad++;
             } else {
                 carrito.push({
-                    ...producto,
+                    id: producto.id,
+                    nombre: producto.nombre,
+                    icono: producto.icono,
+                    precio: producto.precio,
                     cantidad: 1
                 });
             }
             
             actualizarCarrito();
             
-            // ENVIAR NOTIFICACIÓN CUANDO SE AGREGA AL CARRITO
-            enviarNotificacion(
-                "🛍️ Producto agregado",
-                `Añadiste ${producto.icono} ${producto.nombre} al carrito`,
-                producto.icono
-            );
+            // Enviar notificación inmediata
+            if (notificacionesActivadas) {
+                enviarNotificacion(
+                    `${producto.icono} Agregado al carrito`,
+                    `Has añadido ${producto.nombre} - $${producto.precio.toFixed(2)}`
+                );
+            }
         }
 
-        // ============== ACTUALIZAR CARRITO ==============
+        // ====== ACTUALIZAR CARRITO ======
         function actualizarCarrito() {
-            elementos.cartItems.innerHTML = '';
+            elementos.listaCarrito.innerHTML = '';
             
             if (carrito.length === 0) {
-                elementos.cartItems.innerHTML = '<p style="text-align: center; color: #999;">Tu carrito está vacío</p>';
-                elementos.placeOrder.disabled = true;
-                elementos.totalAmount.textContent = '$0.00';
+                elementos.listaCarrito.innerHTML = '<p style="text-align:center; color:#999;">Carrito vacío</p>';
+                elementos.btnPedir.disabled = true;
+                elementos.total.textContent = '$0.00';
                 return;
             }
             
-            elementos.placeOrder.disabled = false;
+            elementos.btnPedir.disabled = false;
             let total = 0;
             
             carrito.forEach(item => {
                 const subtotal = item.precio * item.cantidad;
                 total += subtotal;
                 
-                const itemElement = document.createElement('div');
-                itemElement.className = 'cart-item';
-                itemElement.innerHTML = `
+                const div = document.createElement('div');
+                div.className = 'item-carrito';
+                div.innerHTML = `
                     <div>
                         <strong>${item.icono} ${item.nombre}</strong>
-                        <div style="font-size: 0.9rem; color: #666;">${item.cantidad} x $${item.precio.toFixed(2)}</div>
+                        <div style="font-size:0.9em; color:#666">${item.cantidad} x $${item.precio.toFixed(2)}</div>
                     </div>
                     <div>$${subtotal.toFixed(2)}</div>
                 `;
-                
-                elementos.cartItems.appendChild(itemElement);
+                elementos.listaCarrito.appendChild(div);
             });
             
-            elementos.totalAmount.textContent = `$${total.toFixed(2)}`;
+            elementos.total.textContent = `$${total.toFixed(2)}`;
         }
 
-        // ============== CONFIRMAR PEDIDO ==============
-        function confirmarPedido() {
-            if (carrito.length === 0) return;
-            
-            pedidoConfirmado = true;
-            
-            // Calcular tiempo estimado (2 minutos por producto)
-            const tiempoEstimado = carrito.length * 2;
-            
-            // ENVIAR NOTIFICACIÓN DE PEDIDO CONFIRMADO
-            enviarNotificacion(
-                "✅ Pedido Confirmado",
-                `Tu pedido llegará en ~${tiempoEstimado} minutos. Total: $${elementos.totalAmount.textContent.slice(1)}`,
-                "🚀"
-            );
-            
-            // Simular preparación
-            setTimeout(() => {
-                enviarNotificacion(
-                    "👨‍🍳 En Preparación",
-                    "Tu pedido está siendo preparado ahora mismo",
-                    "👨‍🍳"
-                );
-            }, 3000);
-            
-            // Simular envío
-            setTimeout(() => {
-                enviarNotificacion(
-                    "🚗 En Camino",
-                    "¡Tu pedido está en camino! Prepárate para recibirlo",
-                    "🚗"
-                );
-            }, 10000);
-            
-            // Simular llegada
-            setTimeout(() => {
-                enviarNotificacion(
-                    "🎉 ¡Pedido Entregado!",
-                    "Tu comida ha llegado. ¡Buen provecho!",
-                    "🎉"
-                );
-            }, 20000);
-            
-            alert(`✅ Pedido confirmado! Total: $${elementos.totalAmount.textContent.slice(1)}\nRecibirás notificaciones del estado.`);
-            
-            // Limpiar carrito
-            carrito = [];
-            actualizarCarrito();
-        }
-
-        // ============== SISTEMA DE NOTIFICACIONES ==============
-        function verificarPermisos() {
+        // ====== SISTEMA DE NOTIFICACIONES ======
+        function verificarNotificaciones() {
             if (!("Notification" in window)) {
-                elementos.activateNotifications.innerHTML = "❌ Navegador no compatible";
-                elementos.activateNotifications.disabled = true;
+                elementos.estadoTexto.innerHTML = "❌ Tu navegador no soporta notificaciones";
+                elementos.btnPermisos.disabled = true;
+                elementos.btnPermisos.textContent = "NO COMPATIBLE";
                 return;
             }
             
             if (Notification.permission === "granted") {
-                permisosActivos = true;
-                elementos.activateNotifications.innerHTML = "✅ Notificaciones Activadas";
-                elementos.activateNotifications.style.background = "#4CAF50";
-                elementos.activateNotifications.disabled = true;
+                notificacionesActivadas = true;
+                elementos.estadoTexto.innerHTML = "✅ Notificaciones ACTIVADAS";
+                elementos.btnPermisos.textContent = "✅ ACTIVADAS";
+                elementos.btnPermisos.style.background = "#4CAF50";
+                elementos.btnPermisos.disabled = true;
             } else if (Notification.permission === "denied") {
-                elementos.activateNotifications.innerHTML = "❌ Permisos Bloqueados";
-                elementos.activateNotifications.style.background = "#f44336";
+                elementos.estadoTexto.innerHTML = "❌ Notificaciones BLOQUEADAS - Ve a configuración del navegador";
+                elementos.btnPermisos.textContent = "DESBLOQUEAR MANUALMENTE";
+                elementos.btnPermisos.style.background = "#f44336";
+            } else {
+                elementos.estadoTexto.innerHTML = "⚠️ Haz clic en ACTIVAR NOTIFICACIONES";
             }
         }
 
@@ -404,77 +300,96 @@
                 const permiso = await Notification.requestPermission();
                 
                 if (permiso === "granted") {
-                    permisosActivos = true;
-                    elementos.activateNotifications.innerHTML = "✅ Notificaciones Activadas";
-                    elementos.activateNotifications.style.background = "#4CAF50";
-                    elementos.activateNotifications.disabled = true;
+                    notificacionesActivadas = true;
+                    elementos.estadoTexto.innerHTML = "✅ ¡Notificaciones ACTIVADAS!";
+                    elementos.btnPermisos.textContent = "✅ ACTIVADAS";
+                    elementos.btnPermisos.style.background = "#4CAF50";
+                    elementos.btnPermisos.disabled = true;
                     
                     // Enviar notificación de prueba
                     enviarNotificacion(
-                        "🔔 Notificaciones Activadas",
-                        "¡Ahora recibirás alertas de tus pedidos!",
-                        "✅"
+                        "¡Notificaciones Activadas! 🎉",
+                        "Ahora recibirás alertas de tus pedidos en la bandeja del celular"
                     );
                     
                 } else {
-                    elementos.activateNotifications.innerHTML = "❌ Permisos Denegados";
-                    elementos.activateNotifications.style.background = "#f44336";
-                    alert("Para recibir notificaciones, debes aceptar los permisos. Ve a configuración del navegador.");
+                    elementos.estadoTexto.innerHTML = "❌ Permisos DENEGADOS";
+                    elementos.btnPermisos.textContent = "INTENTAR DE NUEVO";
+                    elementos.btnPermisos.style.background = "#f44336";
+                    alert("Debes aceptar los permisos para recibir notificaciones");
                 }
             } catch (error) {
                 console.error("Error:", error);
+                elementos.estadoTexto.innerHTML = "❌ Error al activar notificaciones";
             }
         }
 
-        function enviarNotificacion(titulo, mensaje, icono = "🍕") {
-            if (!permisosActivos) return;
+        function enviarNotificacion(titulo, mensaje) {
+            if (!notificacionesActivadas) return;
             
+            // Configurar la notificación
             const opciones = {
                 body: mensaje,
-                icon: crearIconoNotificacion(icono),
-                badge: crearIconoNotificacion("🍕"),
-                vibrate: [200, 100, 200],
+                icon: crearIcono("🍕"),
+                badge: crearIcono("📱"),
+                vibrate: [200, 100, 200, 100, 200], // Patrón de vibración
                 tag: 'comida-' + Date.now(),
                 requireInteraction: false,
                 silent: false,
+                timestamp: Date.now(),
                 data: {
                     url: window.location.href,
-                    tipo: 'pedido'
-                }
+                    tipo: 'pedido-comida'
+                },
+                actions: [
+                    {
+                        action: 'ver',
+                        title: '📱 Ver Pedido'
+                    }
+                ]
             };
             
-            // Crear notificación
+            // Crear y mostrar la notificación
             const notificacion = new Notification(titulo, opciones);
             
-            // Al hacer clic en la notificación
-            notificacion.onclick = function() {
+            // Cuando el usuario hace clic en la notificación
+            notificacion.onclick = function(event) {
+                event.preventDefault();
                 window.focus();
-                this.close();
+                notificacion.close();
+                
+                // Mostrar alerta en la página
+                alert("Notificación clickeada: " + titulo);
             };
             
-            // Cerrar automáticamente después de 5 segundos
+            // Cuando se cierra la notificación
+            notificacion.onclose = function() {
+                console.log("Notificación cerrada:", titulo);
+            };
+            
+            // Auto-cerrar después de 7 segundos
             setTimeout(() => {
                 notificacion.close();
-            }, 5000);
+            }, 7000);
             
             return notificacion;
         }
 
-        function crearIconoNotificacion(emoji) {
-            // Crear un icono simple con canvas
+        function crearIcono(emoji) {
+            // Crear icono dinámico
             const canvas = document.createElement('canvas');
             canvas.width = 128;
             canvas.height = 128;
             const ctx = canvas.getContext('2d');
             
-            // Fondo
-            ctx.fillStyle = '#ee5a24';
+            // Fondo circular
+            ctx.fillStyle = '#ff6b35';
             ctx.beginPath();
             ctx.arc(64, 64, 60, 0, Math.PI * 2);
             ctx.fill();
             
-            // Emoji
-            ctx.font = '64px Arial';
+            // Texto/emoji
+            ctx.font = '70px Arial';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.fillStyle = 'white';
@@ -483,36 +398,93 @@
             return canvas.toDataURL();
         }
 
-        // ============== CONFIGURAR EVENTOS ==============
-        function configurarEventos() {
-            elementos.placeOrder.addEventListener('click', confirmarPedido);
-            elementos.activateNotifications.addEventListener('click', activarNotificaciones);
+        // ====== CONFIRMAR PEDIDO ======
+        function confirmarPedido() {
+            if (carrito.length === 0) {
+                alert("Primero agrega productos al carrito");
+                return;
+            }
             
-            // Permitir Enter para confirmar pedido
-            document.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter' && !elementos.placeOrder.disabled) {
-                    confirmarPedido();
-                }
+            // Calcular total
+            const total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+            
+            // Mostrar resumen
+            let resumen = "📋 RESUMEN DEL PEDIDO:\n\n";
+            carrito.forEach(item => {
+                resumen += `${item.icono} ${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toFixed(2)}\n`;
             });
+            resumen += `\n💰 TOTAL: $${total.toFixed(2)}`;
             
-            // Para móviles: vibrar al agregar producto
-            if (navigator.vibrate) {
-                const productos = document.querySelectorAll('.product-card');
-                productos.forEach(prod => {
-                    prod.addEventListener('click', () => {
-                        navigator.vibrate(50);
-                    });
-                });
+            // Confirmar con el usuario
+            if (confirm(resumen + "\n\n¿Confirmar pedido?")) {
+                // ENVIAR NOTIFICACIÓN DE CONFIRMACIÓN
+                if (notificacionesActivadas) {
+                    enviarNotificacion(
+                        "✅ Pedido Confirmado",
+                        `Tu pedido de $${total.toFixed(2)} ha sido confirmado. Llegará en 15-20 minutos.`
+                    );
+                    
+                    // Simular estado del pedido con más notificaciones
+                    setTimeout(() => {
+                        enviarNotificacion(
+                            "👨‍🍳 En Preparación",
+                            "Tu pedido está siendo preparado ahora mismo"
+                        );
+                    }, 2000);
+                    
+                    setTimeout(() => {
+                        enviarNotificacion(
+                            "🚗 En Camino",
+                            "¡Tu pedido está en camino! Prepárate para recibirlo"
+                        );
+                    }, 5000);
+                    
+                    setTimeout(() => {
+                        enviarNotificacion(
+                            "🎉 ¡Pedido Entregado!",
+                            "Tu comida ha llegado. ¡Buen provecho!"
+                        );
+                    }, 8000);
+                }
+                
+                // Limpiar carrito
+                carrito = [];
+                actualizarCarrito();
+                
+                // Mostrar mensaje final
+                alert("🎉 ¡Pedido confirmado exitosamente!\n\n" + 
+                      "Recibirás notificaciones en tu celular con el estado del pedido.\n" +
+                      "Revisa la bandeja de notificaciones.");
+                
+            } else {
+                alert("Pedido cancelado");
             }
         }
 
-        // ============== INICIAR APP ==============
+        // ====== DETECTAR DISPOSITIVO MÓVIL ======
+        function esMovil() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        // ====== INICIAR ======
         window.addEventListener('DOMContentLoaded', init);
 
-        // Detectar dispositivo móvil
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            console.log("📱 Dispositivo móvil detectado - Notificaciones activadas");
+        // Mensaje inicial
+        if (esMovil()) {
+            console.log("📱 Dispositivo móvil detectado - Perfecto para notificaciones");
+            document.querySelector('footer p').innerHTML = "<strong>✅ PERFECTO:</strong> Estás en un celular";
         }
+
+        // Auto-activar si ya tiene permisos
+        setTimeout(() => {
+            if (Notification.permission === "granted" && !notificacionesActivadas) {
+                notificacionesActivadas = true;
+                elementos.estadoTexto.innerHTML = "✅ Notificaciones ACTIVADAS";
+                elementos.btnPermisos.textContent = "✅ ACTIVADAS";
+                elementos.btnPermisos.style.background = "#4CAF50";
+                elementos.btnPermisos.disabled = true;
+            }
+        }, 1000);
 
     </script>
 </body>
